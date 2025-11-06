@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
+import { getCountries, getCountryCallingCode } from 'react-phone-number-input/input';
+import en from 'react-phone-number-input/locale/en.json';
 /** ---- Brand Colors (synced with header + salebanner) ---- */
 export const COLORS = {
   primary: "#826BFB",     // banner bg / brand
@@ -8,6 +10,10 @@ export const COLORS = {
   body: "#6B6A70",        // nav/body text
   bannerText: "#FFFFFF",  // banner text
 };
+
+// Dropdown Options
+export const tefGoalOptions = ["Germany PR", "Job Seeker Visa", "Study in Germany", "Work Abroad / Career Growth"];
+export const germanLevelOptions = ["Beginner (A1)", "Beginner (A2)", "Intermediate (B1)", "Upper Intermediate (B2)", "Advanced (C1/C2)", "Not Sure"];
 
 /** ---- Static content (copy lives with the hook for easy edits) ---- */
 export const content = {
@@ -35,37 +41,50 @@ export const content = {
   formConsent: "I agree to be contacted regarding courses and offers.",
 };
 
+
 /** ---- Lead form state & validation ---- */
 export type LeadForm = {
-  firstName: string;
-  lastName: string;
-  phone: string;
+  fullName: string;
+  countryCode: string;
+  phone: string; 
   email: string;
-  startDate: string;
-  city: string;
-  goals: string;
-  consent: boolean;
+  goal: string; 
+  germanLevel: string; 
+  startDate: string; 
+  learningNeeds: string; 
+  consent: boolean; 
+  expertGuidance: boolean; 
 };
 
 const initial: LeadForm = {
-  firstName: "",
-  lastName: "",
+  fullName: "",
+  countryCode: "India (+91)",
   phone: "",
   email: "",
+  goal: "",
+  germanLevel: "",
   startDate: "",
-  city: "",
-  goals: "",
+  learningNeeds: "",
   consent: false,
+  expertGuidance: false,
 };
-
 
 
 export function useGerman() {
   const [form, setForm] = useState<LeadForm>(initial);
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const countryCodeOptions = useMemo(() => {
+    return getCountries().map(countryCode => {
+      const callingCode = getCountryCallingCode(countryCode);
+      const countryName = en[countryCode]; // Get the country name from the locale
+      return `${countryName} (+${callingCode})`;
+    }).sort(); // Sorting alphabetically
+  }, []);
   const setField = useCallback(
+    // Added 'string | boolean' to support checkbox and select
     (k: keyof LeadForm, v: string | boolean) => {
       setForm((prev) => ({ ...prev, [k]: v }));
     },
@@ -73,75 +92,81 @@ const navigate = useNavigate();
   );
 
 
-  const errors = useMemo(() => {
-    const e: Partial<Record<keyof LeadForm, string>> = {};
-    if (!form.firstName) e.firstName = "Required";
-    if (!form.lastName) e.lastName = "Required";
-    if (!/^\+?[0-9]{7,15}$/.test(form.phone)) e.phone = "Enter a valid phone";
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Enter a valid email";
-    if (!form.startDate) e.startDate = "Select a date";
-    if (!form.city) e.city = "Enter your city";
-    if (!form.consent) e.consent = "Please accept the consent";
-    return e;
-  }, [form]);
+const errors = useMemo(() => {
+  const e: Partial<Record<keyof LeadForm, string>> = {};
+  if (!form.fullName) e.fullName = "Required";
+  if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Enter a valid email";
+  if (!form.countryCode) e.countryCode = "Select your country code";
+  if (!/^\+?[0-9]{7,15}$/.test(form.phone)) e.phone = "Enter a valid phone";
+  if (!form.goal) e.goal = "Select your goal";
+  if (!form.germanLevel) e.germanLevel = "Select your level";
+  if (!form.startDate) e.startDate = "Select a date";
+  
+  // Ensure both consent checkboxes are selected
+  if (!form.consent) e.consent = "You must agree to be contacted regarding courses and offers";
+  if (!form.expertGuidance) e.expertGuidance = "You must agree to expert guidance for the TEF exam";
+
+  return e;
+}, [form]);
+
 
   const hasError = useMemo(() => Object.keys(errors).length > 0, [errors]);
+const handleSubmit = useCallback(async () => {
+  setTouched({
+    fullName: true,
+    countryCode: true,
+    phone: true,
+    email: true,
+    goal: true,
+    germanLevel: true,
+    startDate: true,
+    learningNeeds: true,
+    consent: true,
+    expertGuidance: true,
+  });
 
- // ---- single handleSubmit (posts to /api/submit) ----
-  const handleSubmit = useCallback(async () => {
-    // mark all as touched
-    setTouched({
-      firstName: true,
-      lastName: true,
-      phone: true,
-      email: true,
-      startDate: true,
-      city: true,
-      goals: true,
-      consent: true,
+  if (hasError) return;
+
+  try {
+    setLoading(true);
+
+    const payload = {
+      fullName: form.fullName,
+      countryCode: form.countryCode,  // Send the country code here
+      phone: form.phone,
+      email: form.email,
+      goal: form.goal,
+      germanLevel: form.germanLevel,
+      startDate: form.startDate,
+      learningNeeds: form.learningNeeds,
+      consent: form.consent ? "true" : "false",
+      expertGuidance: form.expertGuidance ? "true" : "false",
+    };
+
+    // Send email request to your backend
+    const emailResponse = await fetch("/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
-      if (!form.consent) {
-        alert("Please agree to be contacted regarding courses and offers.");
-        return;
-      }
 
-    if (hasError) return;
+    const emailJson = await emailResponse.json();
 
-    try {
-      setLoading(true);
-
-      const payload = {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        phone: form.phone,
-        email: form.email,
-        startDate: form.startDate,
-        city: form.city,
-        goals: form.goals,
-        consent: form.consent ? "true" : "false",
-        website: "", // honeypot - keep empty
-      };
-
-      const r = await fetch("/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const json = await r.json();
-      if (json?.ok) {
-        navigate("/thank_you", { replace: true });
-        setForm(initial);
-        setTouched({});
-      } else {
-        alert(json?.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      alert("Network error. Please try again.");
-    } finally {
-      setLoading(false);
+    // Only navigate to the thank you page if the submission was successful
+    if (emailJson?.message === "Emails sent and data stored successfully") {
+      setTouched({});
+      navigate("/thank_you", { replace: true }); // Use replace to avoid history stack issue
+    } else {
+      alert(emailJson?.error || "Something went wrong. Please try again.");
     }
-  }, [form, hasError]);
+  } catch (err) {
+    console.error("Error submitting form:", err);
+    alert("Network error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+}, [form, hasError, navigate]);
+
 
   return {
     COLORS,
@@ -153,6 +178,9 @@ const navigate = useNavigate();
     setTouched,
     handleSubmit,
     loading,
+    // Exporting the options
+    tefGoalOptions, 
+    germanLevelOptions,
   };
 }
 

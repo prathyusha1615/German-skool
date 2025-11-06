@@ -4,7 +4,6 @@ import Home from './Home';
 import Contact from './Contact';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import PopUp from './components/PopUp';
-import LeadsTable from './components/LeadsTable';
 import ThankYouPage from './ThankYouPage';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsAndConditions from './TermsAndConditions';
@@ -16,7 +15,6 @@ function App() {
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact_us" element={<Contact />} />
-        <Route path="/leads" element={<LeadsTable />} />
         <Route path="/thank_you" element={<ThankYouPage />} />
         <Route path="/privacy_policy" element={<PrivacyPolicy />} />
         <Route path="/terms_and_conditions" element={<TermsAndConditions />} />

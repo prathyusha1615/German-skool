@@ -1,102 +1,96 @@
-// api/submit.js
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
-/** Small helper to safely read envs on the server */
-const env = (k, fallback = "") => process.env[k] ?? fallback;
-
-const transporter = nodemailer.createTransport({
-  host: env("SMTP_HOST"),
-  port: Number(env("SMTP_PORT") || 587),
-  secure: env("SMTP_PORT") === "465", // true for 465, false for 587
-  auth: {
-    user: env("SMTP_USER"),
-    pass: env("SMTP_PASS"),
-  },
-});
-
-function renderAdminHTML(payload) {
-  const rows = Object.entries(payload)
-    .map(
-      ([k, v]) =>
-        `<tr><td style="padding:6px 10px;background:#f7f7fb">${k}</td><td style="padding:6px 10px">${String(
-          v ?? ""
-        )}</td></tr>`
-    )
-    .join("");
-  return `
-    <div style="font-family:Inter,system-ui,Arial,sans-serif">
-      <h2 style="margin:0 0 12px">${env("BRAND_NAME", "New Lead")} — Form Submission</h2>
-      <table style="border-collapse:collapse;border:1px solid #e9e9f2">${rows}</table>
-      <p style="color:#778">This message was generated automatically by the website form.</p>
-    </div>
-  `;
-}
-
-function renderUserHTML(firstName) {
-  const brand = env("BRAND_NAME", "Our Team");
-  return `
-    <div style="font-family:Inter,system-ui,Arial,sans-serif">
-      <h2>Thanks for contacting ${brand}${firstName ? ", " + firstName : ""}!</h2>
-      <p>We’ve received your details. A counselor will reach out shortly to help you get started.</p>
-      <p>— ${brand}</p>
-    </div>
-  `;
-}
-
-/** Vercel serverless handler */
 export default async function handler(req, res) {
-  // Only POST
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ ok: false, error: "Method Not Allowed" });
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  try {
-    const payload = req.body || {};
+  const { fullName, email, phone, goal, germanLevel, startDate, learningNeeds, consent, countryCode } = req.body;
 
-    // Honeypot (simple spam guard)
-    if (payload.website) {
-      return res.json({ ok: true }); // pretend success, but do nothing
-    }
+  // Set up the nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: process.env.SMTP_PORT === '465', 
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
 
-    // Minimal validation (keep in sync with your client-side)
-    const required = ["firstName", "lastName", "phone", "email", "startDate", "city", "consent"];
-    for (const k of required) {
-      if (payload[k] === undefined || payload[k] === "" || payload[k] === false) {
-        return res.status(400).json({ ok: false, error: `Missing or invalid field: ${k}` });
+  // Send confirmation email to the user
+  const mailOptions = {
+    from: process.env.MAIL_FROM,
+    to: email,
+    subject: 'We received your request',
+    html: `<h1>Thank you for contacting us, ${fullName}!</h1>
+          <p>We’ll contact you shortly regarding your goal of ${goal}.</p>
+          <p>Code: ${countryCode}</p>`
+  };
+
+  // Admin email with submission details
+  const adminMailOptions = {
+    from: process.env.MAIL_FROM,
+    to: process.env.MAIL_TO,
+    subject: `New Lead: ${fullName} - ${goal}`,
+    html: `
+      <h2>New Submission</h2>
+      <p>Name: ${fullName}</p>
+      <p>Email: ${email}</p>
+      <p>Code: ${countryCode}</p>
+      <p>Phone: ${phone}</p>
+      <p>Goal: ${goal}</p>
+      <p>German Level: ${germanLevel}</p>
+      <p>Start Date: ${startDate}</p>
+      <p>Learning Needs: ${learningNeeds}</p>
+      <p>Consent: ${consent}</p>
+    `,
+  };
+
+  // Google Sheets API call (Apps Script URL)
+  const googleSheetUrl = process.env.APPS_SCRIPT_URL; // Ensure this URL is stored in your environment variables
+  const googleSheetPayload = {
+    fullName,
+    email,
+    phone,
+    goal,
+    germanLevel,
+    startDate,
+    learningNeeds,
+    consent,
+    countryCode
+  };
+
+  // Function to store data in Google Sheets
+  const storeInGoogleSheet = async () => {
+    try {
+      const response = await fetch(googleSheetUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(googleSheetPayload),
+      });
+      const result = await response.json();
+      if (result.status !== 'success') {
+        throw new Error('Failed to store data in Google Sheets');
       }
+    } catch (error) {
+      console.error('Error storing data in Google Sheets:', error);
+      throw new Error('Failed to store data in Google Sheets');
     }
+  };
 
-    // 1) Send admin/review email
-    await transporter.sendMail({
-      from: env("MAIL_FROM"),
-      to: env("MAIL_TO"),
-      subject: `New Lead • ${payload.firstName} ${payload.lastName} • ${payload.city}`,
-      replyTo: payload.email, // so you can reply straight to the student
-      html: renderAdminHTML({
-        FirstName: payload.firstName,
-        LastName: payload.lastName,
-        Phone: payload.phone,
-        Email: payload.email,
-        PreferredStartDate: payload.startDate,
-        City: payload.city,
-        Goals: payload.goals,
-        Consent: payload.consent ? "Yes" : "No",
-        Timestamp: new Date().toISOString(),
-      }),
-    });
+  try {
+    // Store data in Google Sheets
+    await storeInGoogleSheet();
 
-    // 2) Send user auto-reply (optional but nice UX)
-    await transporter.sendMail({
-      from: env("MAIL_FROM"),
-      to: payload.email,
-      subject: `We received your request — ${env("BRAND_NAME", "German School")}`,
-      html: renderUserHTML(payload.firstName),
-    });
+    // Send emails
+    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(adminMailOptions);
 
-    return res.json({ ok: true });
-  } catch (err) {
-    console.error("Email send error:", err);
-    return res.status(500).json({ ok: false, error: "Email sending failed" });
+    res.status(200).json({ message: 'Emails sent and data stored successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    
   }
 }
