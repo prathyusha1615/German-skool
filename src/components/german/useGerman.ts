@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-
+import { useNavigate } from 'react-router-dom';
 /** ---- Brand Colors (synced with header + salebanner) ---- */
 export const COLORS = {
   primary: "#826BFB",     // banner bg / brand
@@ -64,7 +64,7 @@ export function useGerman() {
   const [form, setForm] = useState<LeadForm>(initial);
   const [loading, setLoading] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-
+const navigate = useNavigate();
   const setField = useCallback(
     (k: keyof LeadForm, v: string | boolean) => {
       setForm((prev) => ({ ...prev, [k]: v }));
@@ -130,7 +130,7 @@ export function useGerman() {
 
       const json = await r.json();
       if (json?.ok) {
-        alert("Thanks! We’ll contact you shortly.");
+        navigate("/thank_you", { replace: true });
         setForm(initial);
         setTouched({});
       } else {

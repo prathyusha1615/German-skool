@@ -130,17 +130,24 @@ export default function Footer({
                 Legal
               </div>
               <ul className="space-y-4">
-                {["Privacy Policy", "Terms of Use"].map((t) => (
-                  <li key={t}>
+                  <li>
                     <a
-                      href="#"
+                      href="/privacy_policy"
                       className="text-[15px] leading-6 hover:underline"
                       style={{ color: neutralSecondary, fontFamily: "Raveo Display, sans-serif" }}
                     >
-                      {t}
+                      Privacy Policy
                     </a>
                   </li>
-                ))}
+                                    <li>
+                    <a
+                      href="/terms_and_conditions"
+                      className="text-[15px] leading-6 hover:underline"
+                      style={{ color: neutralSecondary, fontFamily: "Raveo Display, sans-serif" }}
+                    >
+                      Terms of Use
+                    </a>
+                  </li>
               </ul>
             </nav>
           </div>
