@@ -7,19 +7,19 @@ const PrivacyPolicy = () => {
     <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="text-[#022850] md:text-4xl text-3xl font-bold mb-8">Privacy Policy</h1>
       <p className="text-[#757279] mb-8">
-        At Online French Skool, a part of The Language Skool (TLS), we understand the importance of your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard the information you provide when visiting our website [www.onlinefrenchskool.com] (the “Site”).
+        At Online German Skool, a part of The Language Skool (TLS), we understand the importance of your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard the information you provide when visiting our website [www.onlinegermanskool.com] (the “Site”).
         By using our Site, you agree to this Privacy Policy and the associated Terms and Conditions. If you do not agree, please do not use the Site.
       </p>
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">1. Relationship with The Language Skool (TLS)</h2>
       <p className="text-[#757279] mb-4">
-        Online French Skool operates as a division under The Language Skool (TLS). All references to “we”, “our”, or “us” in this Privacy Policy refer collectively to Online French Skool and The Language Skool (TLS).
+        Online German Skool operates as a division under The Language Skool (TLS). All references to “we”, “our”, or “us” in this Privacy Policy refer collectively to Online German Skool and The Language Skool (TLS).
         Certain information collected on this Site may be shared with or processed by TLS to help improve services, maintain compliance, and ensure consistent quality across all TLS divisions.
       </p>
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">2. Personal and Other Information</h2>
       <p className="text-[#757279] mb-4">
-        Through your interaction and use of our Site, Online French Skool may collect:
+        Through your interaction and use of our Site, Online German Skool may collect:
         <br />
         <strong>Personal Information:</strong> data that identifies or relates to you as an individual, such as your name, address, email, phone number, or other contact details.
         <br />
@@ -49,7 +49,7 @@ const PrivacyPolicy = () => {
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">5. How We Use Your Information</h2>
       <p className="text-[#757279] mb-4">
-        In accordance with applicable law, Online French Skool and The Language Skool (TLS) may use your Personal and Other Information to:
+        In accordance with applicable law, Online German Skool and The Language Skool (TLS) may use your Personal and Other Information to:
       </p>
         <ul className="list-disc pl-6 text-[#757279] mb-4">
           <li>Provide, personalise, and improve our educational services</li>
@@ -77,7 +77,7 @@ const PrivacyPolicy = () => {
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">8. Children’s Privacy</h2>
       <p className="text-[#757279] mb-4">
-        Online French Skool does not knowingly collect Personal Information from children under the age of 13. If you believe your child has provided information to us, please contact us immediately so that we can take appropriate action.
+        Online German Skool does not knowingly collect Personal Information from children under the age of 13. If you believe your child has provided information to us, please contact us immediately so that we can take appropriate action.
       </p>
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">9. Data Security</h2>
@@ -92,7 +92,7 @@ const PrivacyPolicy = () => {
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">11. Links to Other Websites</h2>
       <p className="text-[#757279] mb-4">
-        Our Site may contain links to third-party websites. Online French Skool and The Language Skool (TLS) are not responsible for the privacy practices or content of those websites. We encourage you to review their privacy policies.
+        Our Site may contain links to third-party websites. Online German Skool and The Language Skool (TLS) are not responsible for the privacy practices or content of those websites. We encourage you to review their privacy policies.
       </p>
 
       <h2 className="text-[#022850] text-2xl font-semibold mb-2">12. Your Rights and Choices</h2>
