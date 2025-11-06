@@ -26,10 +26,10 @@ const Input: React.FC<InputProps> = ({ error, type, value, placeholder, ...props
         type={type}
         value={value}
         placeholder={isDate ? undefined : placeholder}
-        className={`w-full rounded-lg border-none bg-[#FFFFFF80] px-3 py-3 text-sm outline-none transition placeholder:opacity-60 ${showOverlay ? "date-mask-hidden" : ""}`}
+        className={`w-full rounded-lg border-none bg-[#F0EFF1] px-3 py-3 text-sm outline-none transition placeholder:opacity-60 ${showOverlay ? "date-mask-hidden" : ""}`}
       />
       {showOverlay && placeholder ? (
-        <span className="pointer-events-none absolute left-3 top-3 text-sm text-[#47464A]">
+        <span className="pointer-events-none absolute left-3 top-3 text-sm text-[#B2B0BA]">
           {placeholder}
         </span>
       ) : null}
@@ -45,7 +45,7 @@ const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement> & { e
   <div className="space-y-1">
     <textarea
       {...props}
-      className={`w-full min-h-[100px] rounded-lg border-none bg-[#FFFFFF80] px-3 py-3 text-sm text-[#47464A] outline-none transition placeholder:opacity-60 ${
+      className={`w-full min-h-[100px] rounded-lg border-none bg-[#F0EFF1] px-3 py-3 text-sm text-[#000000] outline-none transition placeholder:opacity-60 ${
         error ? "border-red-400" : "border-gray-200"
       } focus:border-gray-400`}
     />
@@ -66,8 +66,8 @@ const Select: React.FC<SelectProps> = ({ error, placeholder, options, value, ...
   {...props}
   value={value}
   // Style to show placeholder color when no value is selected
-  className={`w-full rounded-lg appearance-none border-none bg-[#FFFFFF80] px-3 py-3 text-sm outline-none transition placeholder:opacity-60 
-    ${value === "" ? "text-[#47464A] opacity-60" : "text-[#47464A]"} `}
+  className={`w-full rounded-lg appearance-none border-none bg-[#F0EFF1] px-3 py-3 text-sm outline-none transition placeholder:opacity-60 
+    ${value === "" ? "text-[#B2B0BA]" : "text-[#000000]"} `}
 >
   <option value="" disabled hidden>
     {placeholder}
@@ -118,8 +118,8 @@ const GermanForm: React.FC = () => {
 
   return (
     <div className="w-full md:w-[620px] md:pl-[40px]">
-      <div className="mx-auto w/full max-w-[580px] rounded-2xl bg-[#F0EFF1] p-6 pt-16 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
-        <h3 className="text-center text-[28px] font-semibold text-[#022850]">{content.formTitle}</h3>
+      <div className="mx-auto w/full max-w-[580px] rounded-2xl bg-[#FFFFFF] p-6 pt-16 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+        <h3 className="text-center text-[28px] font-semibold text-[#242325]">{content.formTitle}</h3>
 
         <div className="mt-6 grid grid-cols-1 gap-3">
           <Input // Full Name
@@ -234,7 +234,7 @@ const GermanForm: React.FC = () => {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="mt-2 inline-flex h-12 py-3 w-full items-center justify-center rounded-xl font-semibold transition-transform duration-150 hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-60 bg-[#FEAD29] text-[#FFFEF8]"
+            className="mt-2 inline-flex h-12 py-3 w-full items-center justify-center rounded-xl font-semibold transition-transform duration-150 hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-60 bg-[#A190FC] text-[#FFFEF8]"
           >
             {loading ? "Submitting..." : content.ctas.submit}
           </button>

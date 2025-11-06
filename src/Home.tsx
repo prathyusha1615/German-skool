@@ -16,7 +16,7 @@ import Journey from "./components/journey/Journey";
 const Home: React.FC = () => {
   return (
     <div>
-      <SaleBanner />
+      <SaleBanner deadline="2025-11-07T23:59:00+05:30" ctaHref="/contact_us" />
       <Header onCtaClick={() => window.location.assign("#book")} />
       <German/>
       <LearnGerman/>

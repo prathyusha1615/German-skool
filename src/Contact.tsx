@@ -10,7 +10,7 @@ import ContactHero from "./components/contact/ContactHero";
 const Home: React.FC = () => {
   return (
     <>
-        <SaleBanner />
+        <SaleBanner  deadline="2025-11-07T23:59:00+05:30" ctaHref="/contact_us" />
         <Header onCtaClick={() => window.location.assign("#book")} />
         <ContactHero/>
         <Journey />

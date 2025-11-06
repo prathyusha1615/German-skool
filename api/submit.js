@@ -1,4 +1,71 @@
+// api/submit.js
 import nodemailer from 'nodemailer';
+
+function assertEnv() {
+  const required = [
+    'SMTP_HOST',
+    'SMTP_PORT',
+    'SMTP_USER',
+    'SMTP_PASS',
+    'MAIL_FROM',
+    'MAIL_TO',
+    'APPS_SCRIPT_URL',
+  ];
+  const missing = required.filter(k => !process.env[k]);
+  if (missing.length) {
+    throw new Error(`Missing env vars: ${missing.join(', ')}`);
+  }
+  // Validate URL & scheme
+  try {
+    const u = new URL(process.env.APPS_SCRIPT_URL);
+    if (u.protocol !== 'https:') {
+      throw new Error('APPS_SCRIPT_URL must start with https://');
+    }
+  } catch (e) {
+    throw new Error(`Invalid APPS_SCRIPT_URL: ${e.message}`);
+  }
+}
+
+async function storeInGoogleSheet(payload) {
+  const url = process.env.APPS_SCRIPT_URL;
+
+  // Optional: add a timeout so the function doesn’t hang
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), 8000); // 8s
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    // Handle non-2xx explicitly
+    if (!resp.ok) {
+      const text = await resp.text().catch(() => '');
+      throw new Error(`Sheets responded ${resp.status}: ${text}`);
+    }
+
+    // Expect JSON like { status: "success" }
+    let result = {};
+    try {
+      result = await resp.json();
+    } catch {
+      // If your Apps Script returns text, adjust as needed
+      throw new Error('Sheets response was not valid JSON');
+    }
+
+    if (result.status !== 'success') {
+      throw new Error('Sheets reported failure');
+    }
+  } catch (err) {
+    // Surface precise reason up the stack
+    throw new Error(`Google Sheets error: ${err.message}`);
+  } finally {
+    clearTimeout(t);
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -6,31 +73,54 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { fullName, email, phone, goal, germanLevel, startDate, learningNeeds, consent, countryCode } = req.body;
+  try {
+    assertEnv();
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 
-  // Set up the nodemailer transporter
+  const {
+    fullName,
+    email,
+    phone,
+    goal,
+    germanLevel,
+    startDate,
+    learningNeeds,
+    consent,
+    countryCode,
+    expertGuidance, // in case you pass it through
+  } = req.body || {};
+
+  // Create transporter
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: process.env.SMTP_PORT === '465', 
+    port: Number(process.env.SMTP_PORT),
+    secure: Number(process.env.SMTP_PORT) === 465, // TRUE for 465
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
   });
 
-  // Send confirmation email to the user
-  const mailOptions = {
+  // Optional: verify SMTP creds early (helps with faster failures)
+  try {
+    await transporter.verify();
+  } catch (e) {
+    return res.status(500).json({ error: `SMTP verify failed: ${e.message}` });
+  }
+
+  // Emails
+  const userMail = {
     from: process.env.MAIL_FROM,
     to: email,
     subject: 'We received your request',
     html: `<h1>Thank you for contacting us, ${fullName}!</h1>
-          <p>We’ll contact you shortly regarding your goal of ${goal}.</p>
-          <p>Code: ${countryCode}</p>`
+           <p>We’ll contact you shortly regarding your goal of ${goal}.</p>
+           <p>Code: ${countryCode}</p>`,
   };
 
-  // Admin email with submission details
-  const adminMailOptions = {
+  const adminMail = {
     from: process.env.MAIL_FROM,
     to: process.env.MAIL_TO,
     subject: `New Lead: ${fullName} - ${goal}`,
@@ -45,12 +135,12 @@ export default async function handler(req, res) {
       <p>Start Date: ${startDate}</p>
       <p>Learning Needs: ${learningNeeds}</p>
       <p>Consent: ${consent}</p>
+      <p>Expert Guidance: ${expertGuidance}</p>
     `,
   };
 
-  // Google Sheets API call (Apps Script URL)
-  const googleSheetUrl = process.env.APPS_SCRIPT_URL; // Ensure this URL is stored in your environment variables
-  const googleSheetPayload = {
+  // Payload for Sheets
+  const sheetPayload = {
     fullName,
     email,
     phone,
@@ -59,38 +149,26 @@ export default async function handler(req, res) {
     startDate,
     learningNeeds,
     consent,
-    countryCode
-  };
-
-  // Function to store data in Google Sheets
-  const storeInGoogleSheet = async () => {
-    try {
-      const response = await fetch(googleSheetUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(googleSheetPayload),
-      });
-      const result = await response.json();
-      if (result.status !== 'success') {
-        throw new Error('Failed to store data in Google Sheets');
-      }
-    } catch (error) {
-      console.error('Error storing data in Google Sheets:', error);
-      throw new Error('Failed to store data in Google Sheets');
-    }
+    countryCode,
+    expertGuidance,
+    submittedAt: new Date().toISOString(),
   };
 
   try {
-    // Store data in Google Sheets
-    await storeInGoogleSheet();
+    // 1) Store in Google Sheets first
+    await storeInGoogleSheet(sheetPayload);
 
-    // Send emails
-    await transporter.sendMail(mailOptions);
-    await transporter.sendMail(adminMailOptions);
+    // 2) Send emails
+    await Promise.all([
+      transporter.sendMail(userMail),
+      transporter.sendMail(adminMail),
+    ]);
 
-    res.status(200).json({ message: 'Emails sent and data stored successfully' });
+    return res
+      .status(200)
+      .json({ message: 'Emails sent and data stored successfully' });
   } catch (error) {
-    console.error('Error:', error);
-    
+    // Always respond
+    return res.status(500).json({ error: error.message || 'Unknown error' });
   }
 }
