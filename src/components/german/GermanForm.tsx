@@ -166,8 +166,8 @@ const GermanForm: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Select // Goal with TEF
-              placeholder="Goal with TEF"
+            <Select // Goal with German
+              placeholder="Goal with German"
               value={form.goal}
               options={tefGoalOptions}
               onBlur={() => setTouched((t) => ({ ...t, goal: true }))}
@@ -194,6 +194,7 @@ const GermanForm: React.FC = () => {
             onChange={(e) => setField("startDate", e.target.value)}
             error={touched.startDate ? errors.startDate : undefined}
             required // Added required
+            min={new Date().toISOString().split("T")[0]} 
           />
 
           <Textarea // Describe your learning needs
