@@ -135,7 +135,7 @@ const handleSubmit = useCallback(async () => {
 
     const payload = {
       fullName: form.fullName,
-      countryCode: form.countryCode,  // Send the country code here
+      countryCode: form.countryCode,
       phone: form.phone,
       email: form.email,
       goal: form.goal,
@@ -146,23 +146,23 @@ const handleSubmit = useCallback(async () => {
       expertGuidance: form.expertGuidance ? "true" : "false",
     };
 
-// At the top of useGerman.ts (or a config file)
-const API_BASE_URL =
-  (import.meta as any).env?.VITE_API_BASE_URL || "http://localhost:5000";
+    // 👇 Decide base URL depending on where the app runs
+    const isLocal = window.location.hostname === "localhost";
+    const apiUrl = isLocal
+      ? "http://localhost:5000/api/submit"
+      : "/api/submit"; // this becomes https://onlinegermanskool.com/api/submit in prod
 
-// Inside handleSubmit
-const emailResponse = await fetch(`${API_BASE_URL}/api/submit`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(payload),
-});
+    const emailResponse = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
     const emailJson = await emailResponse.json();
 
-    // Only navigate to the thank you page if the submission was successful
     if (emailJson?.message === "Emails sent and data stored successfully") {
       setTouched({});
-      navigate("/thank_you", { replace: true }); // Use replace to avoid history stack issue
+      navigate("/thank_you", { replace: true });
     } else {
       alert(emailJson?.error || "Something went wrong. Please try again.");
     }
