@@ -59,7 +59,7 @@ export default function Footer({
           {/* Left block (logo + newsletter) */}
           <div className="md:col-span-7 max-w-xl">
             {/* Logo */}
-            <img src="/logo.svg" alt="Online French Skool Logo" />
+            <img src="https://media.onlinegermanskool.com/logo.svg" alt="Online French Skool Logo" />
             {/* Copy */}
             <p
               className="mt-6 text-[15px] leading-6"

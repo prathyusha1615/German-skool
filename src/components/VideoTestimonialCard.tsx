@@ -116,22 +116,22 @@ export default function VideoTestimonialsRow() {
     {
       name: "Devon Lane",
       video:
-        "/video1.mp4",
+        "https://media.onlinegermanskool.com/video1.mp4",
     },
     {
       name: "Guy Hawkins",
       video:
-        "/video2.mp4",
+        "https://media.onlinegermanskool.com/video2.mp4",
     },
     {
       name: "Annette Black",
       video:
-        "/video3.mp4",
+        "https://media.onlinegermanskool.com/video3.mp4",
     },
     {
       name: "Jenny Wilson",
       video:
-        "/video4.mp4",
+        "https://media.onlinegermanskool.com/video4.mp4",
     },
   ];
 

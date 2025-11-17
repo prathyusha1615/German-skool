@@ -14,7 +14,7 @@ export default function FloatingWhatsApp() {
                  flex"
     >
       <img
-        src="/assets/whatsapp_icon.png"
+        src="https://media.onlinegermanskool.com/assets/whatsapp_icon.png"
         alt=""
         className="h-12 w-12 rounded-full cursor-pointer shadow-lg"
       />

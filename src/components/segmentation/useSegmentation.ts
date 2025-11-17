@@ -25,7 +25,7 @@ export default function useSegmentation() {
   };
 
   const image = {
-    src: '/assets/image5.svg', // place in /public or update path
+    src: 'https://media.onlinegermanskool.com/assets/image5.svg', // place in /public or update path
     alt: 'Smiling learner studying in a cozy setting',
   };
 

@@ -24,7 +24,7 @@ const PopUp: React.FC = () => {
         {/* LEFT IMAGE */}
         <div className="hidden md:block ">
           <img
-            src="/popupimage.svg" /* change to your asset */
+            src="https://media.onlinegermanskool.com/popupimage.svg" /* change to your asset */
             alt="Learning"
             className="object-cover"
           />

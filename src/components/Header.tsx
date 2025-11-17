@@ -46,7 +46,7 @@ export default function Header({
         <div className="mx-auto flex h-20 w-full items-center justify-between px-4 md:px-8">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+            <img src="https://media.onlinegermanskool.com/logo.svg" alt="Logo" className="h-8 w-auto" />
           </a>
 
           {/* Desktop nav */}
@@ -108,7 +108,7 @@ export default function Header({
           >
             {/* top bar within overlay */}
             <div className="flex items-center justify-between px-4 py-4">
-              <img src="/logo.svg" alt="Logo" className="h-7 w-auto" />
+              <img src="https://media.onlinegermanskool.com/logo.svg" alt="Logo" className="h-7 w-auto" />
               <button
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}

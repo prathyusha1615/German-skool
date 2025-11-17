@@ -3,11 +3,11 @@ import useGerman from "./useGerman";
 import GermanForm from "./GermanForm";
 
 const avatars: string[] = [
-  "/assets/avatar/Avatar1.svg",
-  "/assets/avatar/Avatar2.svg",
-  "/assets/avatar/Avatar3.svg",
-  "/assets/avatar/Avatar4.svg",
-  "/assets/avatar/1k.svg",
+  "https://media.onlinegermanskool.com/assets/avatar/Avatar1.svg",
+  "https://media.onlinegermanskool.com/assets/avatar/Avatar2.svg",
+  "https://media.onlinegermanskool.com/assets/avatar/Avatar3.svg",
+  "https://media.onlinegermanskool.com/assets/avatar/Avatar4.svg",
+  "https://media.onlinegermanskool.com/assets/avatar/1k.svg",
 ];
 
 const RingCheck: React.FC<{ color?: string }> = ({ color = "#3AA376" }) => (
@@ -154,7 +154,7 @@ const German: React.FC = () => {
           {/* RIGHT: Form */}
           <div className="relative">
             <div className="absolute -top-20 left-60 animate-bounce ">
-              <img src="/msg.svg" alt="" />
+              <img src="https://media.onlinegermanskool.com/msg.svg" alt="" />
             </div>
             <GermanForm />
           </div>

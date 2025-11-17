@@ -4,11 +4,11 @@ import { DatePicker } from "antd";
 import dayjs, { type Dayjs } from "dayjs";
 import GermanForm from "../german/GermanForm";
 const avatars: string[] = [
-  "/assets/socialicons/Facebook.svg",
-  "/assets/socialicons/Instagram.svg",
-  "/assets/socialicons/LinkedIn.svg",
-  "/assets/socialicons/YouTube.svg",
-  "/assets/socialicons/Twitter.svg",
+  "https://media.onlinegermanskool.com/assets/socialicons/Facebook.svg",
+  "https://media.onlinegermanskool.com/assets/socialicons/Instagram.svg",
+  "https://media.onlinegermanskool.com/assets/socialicons/LinkedIn.svg",
+  "https://media.onlinegermanskool.com/assets/socialicons/YouTube.svg",
+  "https://media.onlinegermanskool.com/assets/socialicons/Twitter.svg",
 ];
 
 const RingCheck: React.FC<{ color?: string }> = ({ color = "#3AA376" }) => (
@@ -98,7 +98,7 @@ const ContactHero: React.FC = () => {
           </div>
           <div className="relative">
             <div className="absolute -top-20 left-60 animate-bounce ">
-               <img src="/msg.svg" alt="" />
+               <img src="https://media.onlinegermanskool.com/msg.svg" alt="" />
             </div>
             <GermanForm />
           </div>

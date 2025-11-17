@@ -15,7 +15,7 @@ const LEVELS: ModuleLevel[] = [
     heading: "Beginner (A1–A2)",
     description:
       "You’ll be able to introduce yourself, ask simple questions, and understand common phrases.",
-    image: "/assets/image1.svg",
+    image: "https://media.onlinegermanskool.com/assets/image1.svg",
     chips: ["Greetings", "Numbers", "Shopping", "Family", "Travel"],
     chipBg: "#70565633", 
   },
@@ -25,7 +25,7 @@ const LEVELS: ModuleLevel[] = [
     heading: "Intermediate (B1–B2)",
     description:
       "Speak confidently in most everyday situations, understand TV/radio, and write structured texts.",
-    image: "/assets/image2.svg",
+    image: "https://media.onlinegermanskool.com/assets/image2.svg",
     chips: ["Work", "Study", "Hobbies", "Expressing Opinions", "German Culture"],
     chipBg: "#70565633", 
   },
@@ -35,7 +35,7 @@ const LEVELS: ModuleLevel[] = [
     heading: "Advanced (C1–C2)",
     description:
       "Understand complex texts, express ideas fluently, and work/study in German-speaking countries.",
-    image: "/assets/image3.svg",
+    image: "https://media.onlinegermanskool.com/assets/image3.svg",
     chips: ["Advanced Grammar", "Academic Writing", "Professional Communication"],
     chipBg: "#70565633", 
   },

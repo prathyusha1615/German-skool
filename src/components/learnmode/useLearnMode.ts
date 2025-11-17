@@ -30,7 +30,7 @@ export default function useLearnMode() {
         'Hyper-Focused Skill Building',
         'Learn at your pace, your way',
       ],
-      image: '/assets/image4.svg', // put an image in public
+      image: 'https://media.onlinegermanskool.com/assets/image4.svg', // put an image in public
       alt: 'Tutor guiding a student in a one-on-one session',
     },
     {
@@ -43,7 +43,7 @@ export default function useLearnMode() {
         'Dynamic Group Sessions',
         'Interactive & Engaging Environment',
       ],
-      image: '/assets/image6.svg', // put an image in public
+      image: 'https://media.onlinegermanskool.com/assets/image6.svg', // put an image in public
       alt: 'Small study group working together with a tutor',
     },
   ];

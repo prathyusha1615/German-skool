@@ -21,7 +21,7 @@ export default function useFreeClass() {
       'Book a free trial class and see how easy and fun learning German can be.',
     cta: 'Book Free Trial Class',
     image:
-      '/assets/freeoffer.svg', // replace with your asset
+      'https://media.onlinegermanskool.com/assets/freeoffer.svg', // replace with your asset
     imageAlt: 'Learner taking an online German trial class',
   };
 
