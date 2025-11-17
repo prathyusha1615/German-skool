@@ -28,7 +28,7 @@ export const content = {
   ],
   bulletsRight: [
     "Regular Batches Available",
-    "24x7 LMS Support",
+    "24x7 Support",
   ],
   socialProof: "Trusted by over 1000+ learners worldwide.",
   formTitle: "Get Personalized Guidance",

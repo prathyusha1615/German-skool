@@ -229,7 +229,7 @@ const GermanForm: React.FC = () => {
     required
   />
   <span className="text-[#A6A6A6]">
-    I’m serious about preparing for the TEF exam and want expert guidance.
+    I’m serious about learning German and want expert guidance.
   </span>
 </label>
 {errors.expertGuidance && touched.expertGuidance && <p className="text-xs text-red-500">{errors.expertGuidance}</p>}

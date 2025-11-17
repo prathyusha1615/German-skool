@@ -34,7 +34,7 @@ export const content = {
   ],
   bulletsRight: [
     "Regular Batches Available",
-    "24x7 LMS Support",
+    "24x7 Support",
   ],
   socialProof: "Trusted by over 1000+ learners worldwide.",
   formTitle: "Get Personalized Guidance",
@@ -107,7 +107,7 @@ const errors = useMemo(() => {
   
   // Ensure both consent checkboxes are selected
   if (!form.consent) e.consent = "You must agree to be contacted regarding courses and offers";
-  if (!form.expertGuidance) e.expertGuidance = "You must agree to expert guidance for the TEF exam";
+  if (!form.expertGuidance) e.expertGuidance = "You must agree to expert guidance for the German exam";
 
   return e;
 }, [form]);
