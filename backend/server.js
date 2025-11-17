@@ -98,57 +98,80 @@ app.post('/api/submit', async (req, res) => {
       email,
       phone,
       goal,
-      frenchLevel,
+      germanLevel,
       startDate,
       learningNeeds,
       consent,
       countryCode,
       expertGuidance,
+
+      // UTM fields coming from useTEF()
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content,
     } = req.body || {};
 
     if (!fullName || !email) {
-      return res.status(400).json({ error: 'Missing required fields fullName or email' });
+      return res
+        .status(400)
+        .json({ error: "Missing required fields fullName or email" });
     }
 
     // Ensure we always send a timestamp (ISO string)
     const timestamp = new Date().toISOString();
 
-    const googleSheetPayload = {
-      fullName: fullName || '',
-      countryCode: countryCode || '',
-      phone: phone || '',
-      email: email || '',
-      goal: goal || '',
-      frenchLevel: frenchLevel || '',
-      startDate: startDate || '',
-      learningNeeds: learningNeeds || '',
-      consent: consent || '',
-      expertGuidance: expertGuidance || '',
-      timestamp,
+    // ---- Payload that goes to Google Sheets ----
+const googleSheetPayload = {
+  fullName,
+  countryCode,
+  phone,
+  email,
+  goal,
+  germanLevel,
+  startDate,
+  learningNeeds,
+  consent,
+  expertGuidance,
+  timestamp,
+  utm_source,
+  utm_medium,
+  utm_campaign,
+  utm_term,
+  utm_content,
+};
 
-    };
 
-    // store in sheet
+    // ---- Store in Google Sheet ----
     let gsResult;
     try {
       gsResult = await postToGoogleSheets(googleSheetPayload, 12000);
-      console.log('Google Sheets result:', gsResult);
+      console.log("Google Sheets result:", gsResult);
     } catch (err) {
-      console.error('Google Sheets error:', err && err.message || err);
-      return res.status(502).json({ error: 'Failed to store in Google Sheets', details: (err && err.message) || String(err) });
+      console.error(
+        "Google Sheets error:",
+        (err && err.message) || err
+      );
+      return res.status(502).json({
+        error: "Failed to store in Google Sheets",
+        details: (err && err.message) || String(err),
+      });
     }
 
-    // send email to user
+    // ---- Emails ----
+
     const userMailOptions = {
       from: MAIL_FROM,
       to: email,
-      subject: 'We received your request',
+      subject: "We received your request",
       html: `<h1>Thanks ${escapeHtml(fullName)}</h1>
-             <p>We'll contact you shortly regarding ${escapeHtml(goal || '')}.</p>
-             <p>Submitted at: ${escapeHtml(timestamp)}</p>`
+             <p>We'll contact you shortly regarding ${escapeHtml(
+               goal || ""
+             )}.</p>
+             <p>Submitted at: ${escapeHtml(timestamp)}</p>`,
     };
 
-    // send admin email
     const adminMailOptions = {
       from: MAIL_FROM,
       to: MAIL_TO,
@@ -156,35 +179,81 @@ app.post('/api/submit', async (req, res) => {
       html: `<h2>New Submission</h2>
              <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
              <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-             <p><strong>Phone:</strong> ${escapeHtml(phone || '')}</p>
-             <p><strong>Country:</strong> ${escapeHtml(countryCode || '')}</p>
-             <p><strong>Submitted at:</strong> ${escapeHtml(timestamp)}</p>
-             <pre>${JSON.stringify(gsResult).slice(0,1000)}</pre>`
+             <p><strong>Phone:</strong> ${escapeHtml(phone || "")}</p>
+             <p><strong>Country:</strong> ${escapeHtml(
+               countryCode || ""
+             )}</p>
+             <p><strong>Goal:</strong> ${escapeHtml(goal || "")}</p>
+             <p><strong>French Level:</strong> ${escapeHtml(
+               germanLevel || ""
+             )}</p>
+             <p><strong>Start Date:</strong> ${escapeHtml(
+               startDate || ""
+             )}</p>
+             <p><strong>Consent:</strong> ${escapeHtml(
+               String(consent || "")
+             )}</p>
+             <p><strong>Expert Guidance:</strong> ${escapeHtml(
+               String(expertGuidance || "")
+             )}</p>
+             <h3>UTM Info</h3>
+             <p><strong>utm_source:</strong> ${escapeHtml(
+               utm_source || ""
+             )}</p>
+             <p><strong>utm_medium:</strong> ${escapeHtml(
+               utm_medium || ""
+             )}</p>
+             <p><strong>utm_campaign:</strong> ${escapeHtml(
+               utm_campaign || ""
+             )}</p>
+             <p><strong>utm_term:</strong> ${escapeHtml(
+               utm_term || ""
+             )}</p>
+             <p><strong>utm_content:</strong> ${escapeHtml(
+               utm_content || ""
+             )}</p>
+             <p><strong>Submitted at:</strong> ${escapeHtml(
+               timestamp
+             )}</p>
+             <pre>${JSON.stringify(gsResult).slice(0, 1000)}</pre>`,
     };
 
-    // Attempt to send both emails
+    // send user email
     try {
       await transporter.sendMail(userMailOptions);
-      console.log('User mail sent');
+      console.log("User mail sent");
     } catch (err) {
-      console.warn('User mail failed:', err && err.message || err);
-      // continue to try admin mail
+      console.warn("User mail failed:", (err && err.message) || err);
+      // continue to admin mail
     }
 
+    // send admin email
     try {
       await transporter.sendMail(adminMailOptions);
-      console.log('Admin mail sent');
+      console.log("Admin mail sent");
     } catch (err) {
-      console.error('Admin mail failed:', err && err.message || err);
-      return res.status(502).json({ error: 'Failed to send admin email', details: err && err.message });
+      console.error("Admin mail failed:", (err && err.message) || err);
+      return res
+        .status(502)
+        .json({ error: "Failed to send admin email", details: err && err.message });
     }
 
-    return res.status(200).json({ message: 'Emails sent and data stored successfully', sheets: gsResult });
+    return res.status(200).json({
+      message: "Emails sent and data stored successfully",
+      sheets: gsResult,
+    });
   } catch (err) {
-    console.error('Unhandled /api/submit error:', err && err.stack || err);
-    return res.status(500).json({ error: 'Internal server error', details: err && err.message });
+    console.error(
+      "Unhandled /api/submit error:",
+      (err && err.stack) || err
+    );
+    return res.status(500).json({
+      error: "Internal server error",
+      details: err && err.message,
+    });
   }
 });
+
 
 /* health */
 app.get('/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));

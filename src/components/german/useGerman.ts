@@ -143,12 +143,16 @@ const handleSubmit = useCallback(async () => {
       expertGuidance: form.expertGuidance ? "true" : "false",
     };
 
-    // Send email request to your backend
-    const emailResponse = await fetch("/api/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+// At the top of useGerman.ts (or a config file)
+const API_BASE_URL =
+  (import.meta as any).env?.VITE_API_BASE_URL || "http://localhost:5000";
+
+// Inside handleSubmit
+const emailResponse = await fetch(`${API_BASE_URL}/api/submit`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+});
 
     const emailJson = await emailResponse.json();
 
