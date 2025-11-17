@@ -1,9 +1,3 @@
-/**
- * server.js
- * Posts lead to Google Apps Script webapp and sends emails.
- * Ensures payload contains timestamp (ISO).
- */
-
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
