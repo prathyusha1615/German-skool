@@ -101,6 +101,9 @@ const errors = useMemo(() => {
   if (!form.goal) e.goal = "Select your goal";
   if (!form.germanLevel) e.germanLevel = "Select your level";
   if (!form.startDate) e.startDate = "Select a date";
+    if (!form.learningNeeds || form.learningNeeds.trim().length < 30) {
+    e.learningNeeds = "Please enter at least 30 characters";
+  }
   
   // Ensure both consent checkboxes are selected
   if (!form.consent) e.consent = "You must agree to be contacted regarding courses and offers";

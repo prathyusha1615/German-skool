@@ -39,10 +39,11 @@ export default function Footer({
             Your Journey to German
             <br /> Fluency Starts Here
           </h2>
+          <p className="text-[14px] w-[35%]  text-[#022850] leading-[21px] font-normal ">Online German Skool is a part of TLS (The Language Skool) — a global platform helping students master international languages with live, interactive, and personalised online courses.</p>
 
           <a
             href="/contact_us"
-            className="inline-flex md:w-fit w-full justify-center items-center gap-2 rounded-lg px-5 py-3 text-white text-[15px] font-semibold"
+            className="inline-flex md:w-fit w-full justify-center items-center gap-2 rounded-lg px-5 py-3 text-[#ffffff] text-[15px] font-semibold"
             style={{ backgroundColor: brandSoft, fontFamily: "Raveo Display, sans-serif" }}
           >
             Book Free Trial Class Today
@@ -58,8 +59,7 @@ export default function Footer({
           {/* Left block (logo + newsletter) */}
           <div className="md:col-span-7 max-w-xl">
             {/* Logo */}
-            <img src="/logo.svg" alt="" />
-
+            <img src="/logo.svg" alt="Online French Skool Logo" />
             {/* Copy */}
             <p
               className="mt-6 text-[15px] leading-6"

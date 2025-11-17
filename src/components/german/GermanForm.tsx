@@ -197,13 +197,16 @@ const GermanForm: React.FC = () => {
             min={new Date().toISOString().split("T")[0]} 
           />
 
-          <Textarea // Describe your learning needs
-            placeholder="Describe your learning needs"
-            value={form.learningNeeds}
-            onBlur={() => setTouched((t) => ({ ...t, learningNeeds: true }))}
-            onChange={(e) => setField("learningNeeds", e.target.value)}
-            required // Added required
-          />
+<Textarea
+  placeholder="Message (min 30 characters)"
+  value={form.learningNeeds}
+  onBlur={() => setTouched((t) => ({ ...t, learningNeeds: true }))} 
+  error={touched.learningNeeds ? errors.learningNeeds : undefined}
+  onChange={(e) => setField("learningNeeds", e.target.value)}
+  required
+  minLength={30}  
+/>
+
 
 <label className="mt-2 flex items-start gap-2 text-sm" style={{ color: "#D1D0D6" }}>
   <input
