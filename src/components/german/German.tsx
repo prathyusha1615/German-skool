@@ -153,7 +153,7 @@ const German: React.FC = () => {
 
           {/* RIGHT: Form */}
           <div className="relative">
-            <div className="absolute -top-20 left-60 animate-bounce ">
+            <div className="absolute -top-20 left-60 animate-bounce md:block hidden ">
               <img src="https://media.onlinegermanskool.com/msg.svg" alt="" />
             </div>
             <GermanForm />
