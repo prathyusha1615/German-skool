@@ -39,7 +39,7 @@ export default function Footer({
             Your Journey to German
             <br /> Fluency Starts Here
           </h2>
-          <p className="text-[14px] w-[35%]  text-[#022850] leading-[21px] font-normal ">Online German Skool is a part of TLS (The Language Skool) — a global platform helping students master international languages with live, interactive, and personalised online courses.</p>
+          <p className="text-[14px] md:w-[35%] md:text-left text-center text-[#022850] leading-[21px] font-normal ">Online German Skool is a part of TLS (The Language Skool) — a global platform helping students master international languages with live, interactive, and personalised online courses.</p>
 
           <a
             href="/contact_us"

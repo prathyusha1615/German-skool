@@ -13,7 +13,7 @@ const t = {
   h4:
     "text-[28px] leading-[35px] font-[600] [font-family:'Raveo_Display',sans-serif] text-[#242325]",
   big:
-    "text-[80px] leading-[30px] font-[500] tracking-[-0.8px] [font-family:'Raveo_Display',sans-serif]",
+    "md:text-[80px] text-[40px] leading-[30px] font-[500] tracking-[-0.8px] [font-family:'Raveo_Display',sans-serif]",
   body:
     "md:text-[20px] text-[14px] leading-[21px] md:leading-[30px] font-[400] [font-family:'Raveo_Display',sans-serif] text-[#242325]",
 };
@@ -46,7 +46,7 @@ function Card({
     >
       <div className={`${t.h4} ${lightText ? "text-white" : ""}`}>{tier}</div>
 
-      <div className="mt-32 grid grid-cols-1 items-center justify-center gap-20 md:grid-cols-[auto_minmax(0,1fr)]">
+      <div className="md:mt-32 mt-16 grid grid-cols-1 items-center justify-center gap-20 md:grid-cols-[auto_minmax(0,1fr)]">
         <div className=" leading-none">
           <div className={`${t.big} ${lightText ? "text-white/95" : "text-[#242325]"}`}>
             {label}

@@ -135,7 +135,7 @@ export default function Package() {
             )}
 
             <h3
-              className={`${t.cardTitle} w-96`}
+              className={`${t.cardTitle} md:w-96`}
               style={{ color: UI.brand }}
             >
               {plans[1].title}
