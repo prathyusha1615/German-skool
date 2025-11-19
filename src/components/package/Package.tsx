@@ -3,7 +3,6 @@
 import React from "react";
 import usePackage from "./usePackage";
 
-/** Same typography scale used in LearnMode */
 const t = {
   caption:
     "text-[14px] leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif]",
@@ -15,7 +14,6 @@ const t = {
     "md:text-[14px] text-[12px] leading-[18px] md:leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif]",
 };
 
-/** inline check icon */
 const Check = ({ color = "#26C281" }: { color?: string }) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
     <path
@@ -28,7 +26,6 @@ const Check = ({ color = "#26C281" }: { color?: string }) => (
   </svg>
 );
 
-/** faint mesh overlay svg */
 const Mesh = () => (
               <svg xmlns="http://www.w3.org/2000/svg" width="199" height="120" viewBox="0 0 199 120" fill="none">
                 <path d="M20.7 1H1V20.6667M20.7 1V20.6667M20.7 1H40.4M20.7 20.6667H1M20.7 20.6667H40.4M20.7 20.6667V40.3333M1 20.6667V40.3333M40.4 1V20.6667M40.4 1H60.1M40.4 20.6667H60.1M40.4 20.6667V40.3333M60.1 1V20.6667M60.1 1H79.8M60.1 20.6667H79.8M60.1 20.6667V40.3333M79.8 1V20.6667M79.8 1H99.5M79.8 20.6667H99.5M79.8 20.6667V40.3333M99.5 1V20.6667M99.5 1H119.2M99.5 20.6667H119.2M99.5 20.6667V40.3333M119.2 1V20.6667M119.2 1H138.9M119.2 20.6667H138.9M119.2 20.6667V40.3333M138.9 1V20.6667M138.9 1H158.6M138.9 20.6667H158.6M138.9 20.6667V40.3333M158.6 1V20.6667M158.6 1H178.3M158.6 20.6667H178.3M158.6 20.6667V40.3333M178.3 1V20.6667M178.3 1H198V20.6667M178.3 20.6667H198M178.3 20.6667V40.3333M198 20.6667V40.3333M20.7 40.3333H1M20.7 40.3333H40.4M20.7 40.3333V60M1 40.3333V60M40.4 40.3333H60.1M40.4 40.3333V60M60.1 40.3333H79.8M60.1 40.3333V60M79.8 40.3333H99.5M79.8 40.3333V60M99.5 40.3333H119.2M99.5 40.3333V60M119.2 40.3333H138.9M119.2 40.3333V60M138.9 40.3333H158.6M138.9 40.3333V60M158.6 40.3333H178.3M158.6 40.3333V60M178.3 40.3333H198M178.3 40.3333V60M198 40.3333V60M20.7 60H1M20.7 60H40.4M20.7 60V79.6667M1 60V79.6667M40.4 60H60.1M40.4 60V79.6667M60.1 60H79.8M60.1 60V79.6667M79.8 60H99.5M79.8 60V79.6667M99.5 60H119.2M99.5 60V79.6667M119.2 60H138.9M119.2 60V79.6667M138.9 60H158.6M138.9 60V79.6667M158.6 60H178.3M158.6 60V79.6667M178.3 60H198M178.3 60V79.6667M198 60V79.6667M20.7 79.6667H1M20.7 79.6667H40.4M20.7 79.6667V99.3333M1 79.6667V99.3333M40.4 79.6667H60.1M40.4 79.6667V99.3333M60.1 79.6667H79.8M60.1 79.6667V99.3333M79.8 79.6667H99.5M79.8 79.6667V99.3333M99.5 79.6667H119.2M99.5 79.6667V99.3333M119.2 79.6667H138.9M119.2 79.6667V99.3333M138.9 79.6667H158.6M138.9 79.6667V99.3333M158.6 79.6667H178.3M158.6 79.6667V99.3333M178.3 79.6667H198M178.3 79.6667V99.3333M198 79.6667V99.3333M20.7 99.3333H1M20.7 99.3333H40.4M20.7 99.3333V119M1 99.3333V119H20.7M40.4 99.3333H60.1M40.4 99.3333V119M60.1 99.3333H79.8M60.1 99.3333V119M79.8 99.3333H99.5M79.8 99.3333V119M99.5 99.3333H119.2M99.5 99.3333V119M119.2 99.3333H138.9M119.2 99.3333V119M138.9 99.3333H158.6M138.9 99.3333V119M158.6 99.3333H178.3M158.6 99.3333V119M178.3 99.3333H198M178.3 99.3333V119M198 99.3333V119H178.3M20.7 119H40.4M40.4 119H60.1M60.1 119H79.8M79.8 119H99.5M99.5 119H119.2M119.2 119H138.9M138.9 119H158.6M158.6 119H178.3" stroke="url(#paint0_radial_446_1864)"/>
@@ -47,7 +44,6 @@ export default function Package() {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] py-16 md:py-24">
-        {/* Section header */}
         <div className="mx-auto max-w-[1300px] items-center justify-center flex flex-col">
           <div
             className={`inline-flex items-center gap-[6px] rounded-[36px] border px-3 py-1 ${t.caption}`}
@@ -65,9 +61,7 @@ export default function Package() {
           </h2>
         </div>
 
-        {/* Two plan cards */}
         <div className="mx-auto mt-8 md:mt-12 grid max-w-[1300px] grid-cols-1 gap-6 md:grid-cols-2">
-          {/* Left: 1-to-1 */}
           <article
             className="relative rounded-[24px] p-6 md:p-8"
             style={{ background: plans[0].bg }}
@@ -114,9 +108,7 @@ export default function Package() {
             </button>
           </article>
 
-          {/* Right: Super 6 */}
           <article className="relative rounded-[24px] border border-[#E7E6EA] bg-white p-6 md:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
-            {/* mesh + badge */}
             <div className="absolute right-0 top-0">
               <Mesh />
             </div>
@@ -162,7 +154,6 @@ export default function Package() {
               Join Super-Intensive Now
             </button>
 
-            {/* subtle card outline to match mock curvature */}
             <div className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-black/5" />
           </article>
         </div>

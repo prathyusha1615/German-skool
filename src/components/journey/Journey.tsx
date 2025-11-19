@@ -1,6 +1,3 @@
-// Journey.tsx
-// Exact look & motion: three counter-rotating rings, 3D tilt, bottom fade, and cards area.
-
 import React from "react";
 import { useJourney } from "./useJourney";
 import TestimonialsMarquee from "../TestimonialsMarquee";
@@ -10,7 +7,6 @@ export default function Journey() {
 
   return (
     <section id="testimonials" className="relative mx-auto w-full overflow-hidden bg-[#E4F1FE]">
-      {/* Header */}
       <div className="mx-auto max-w-4xl px-7 pt-16 text-center">
         <div
           className={`inline-flex bg-[#FFFFFF] text-[#6B6A70] items-center gap-[6px] rounded-[36px] border px-3 py-1 mb-4 `}
@@ -22,7 +18,6 @@ export default function Journey() {
         </h2>
       </div>
 
-      {/* Avatar Orbits */}
         <div
         className="relative mx-auto mt-0  h-[360px] w-full max-w-5xl"
         style={{ perspective: 1200 }}
@@ -34,10 +29,7 @@ export default function Journey() {
                 <div
                 key={ring.id}
                 className="absolute left-1/2 top-48 -translate-x-1/2 -translate-y-1/2"
-                // compose the whole transform once; animate --spin only
                 style={{
-                    // custom properties we’ll animate/read in CSS
-                    // @ts-ignore
                     ['--tilt' as any]: `${ring.tiltDeg}deg`,
                     ['--spin' as any]: `0deg`,
                     transform:
@@ -61,12 +53,10 @@ export default function Journey() {
                         key={a.id}
                         className="absolute rounded-full border border-white/70 shadow-md"
                         style={{
-                        // center each avatar on the ring’s center first
                         left: '50%',
                         top: '50%',
                         width: ring.sizePx,
                         height: ring.sizePx,
-                        // then orbit from there
                         transform: `translate(-50%, -50%) rotate(${deg}deg) translate(${ring.radiusPx}px) rotate(${-deg}deg)`,
                         willChange: 'transform',
                         }}
@@ -85,13 +75,11 @@ export default function Journey() {
             })}
         </div>
 
-        {/* Soft bottom gradient */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#E4F1FE] to-transparent" />
         </div>
 
 
 
-      {/* Cards placeholder (plug your testimonials below) */}
       <TestimonialsMarquee />
       <VideoTestimonialCard />
 

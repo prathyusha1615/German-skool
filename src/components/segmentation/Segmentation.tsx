@@ -3,7 +3,6 @@
 import React from 'react';
 import useSegmentation from './useSegmentation';
 
-/** Typography — identical to LearnMode title tokens */
 const type = {
   caption:
     "text-[14px] leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif]",
@@ -15,7 +14,6 @@ const type = {
     "text-[16px] leading-[24px] font-[600] [font-family:'Raveo_Display',sans-serif]",
 };
 
-/** Circular success icon (green ring + check) */
 const RingCheck: React.FC<{ color?: string }> = ({ color = '#2ECC71' }) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <circle cx="10" cy="10" r="8" stroke={color} strokeWidth="1.6" />
@@ -34,10 +32,8 @@ const Segmentation: React.FC = () => {
 
   return (
     <section className="w-full">
-      {/* Scale/1600, side padding 120, block padding ~64 */}
       <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] py-16 md:py-24">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[568px_minmax(0,1fr)] md:gap-16 ">
-          {/* LEFT: Image (568×436, radius 24) */}
           <div
             className="relative flex justify-center items-center shrink-0 rounded-[24px] overflow-hidden"
           >
@@ -48,9 +44,7 @@ const Segmentation: React.FC = () => {
             />
           </div>
 
-          {/* RIGHT: Card-like stack */}
           <div className="w-full rounded-[16px] ">
-            {/* Caption pill */}
             <div
               className={`inline-flex items-center gap-[6px] rounded-[36px] border px-3 py-1 ${type.caption}`}
               style={{
@@ -62,10 +56,8 @@ const Segmentation: React.FC = () => {
               Segmentation
             </div>
 
-            {/* Heading (same as LearnMode) */}
             <h1 className={`mt-4 ${type.h1}`}>Is This Course<br /> Right For You?</h1>
 
-            {/* Points */}
             <ul className="mt-6 grid grid-cols-2 md:gap-x-4 gap-x-1 md:gap-y-3 gap-y-1 md:grid-cols-1">
               {items.map((it, i) => (
                 <li key={i} className="flex items-start md:gap-3 gap-1">
@@ -80,7 +72,6 @@ const Segmentation: React.FC = () => {
             </ul>
 
 
-            {/* CTA */}
             <a
               href={cta.href}
               className="mt-6 md:w-fit w-full text-center justify-center inline-flex items-center gap-2 rounded-[12px] px-4 py-3 text-[14px] font-[600]"

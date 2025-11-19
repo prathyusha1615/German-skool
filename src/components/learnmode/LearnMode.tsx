@@ -36,12 +36,9 @@ export default function LearnMode() {
 
   return (
     <section id='benefits' className="w-full">
-      {/* Scale/1600, side padding 120 */}
       <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] sm:py-16 md:py-24">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_568px] md:gap-16">
-          {/* LEFT — Accordion like Level component */}
           <div>
-            {/* Caption pill */}
             <div
               className={`inline-flex items-center gap-[6px] rounded-[36px] border px-3 py-1 ${type.caption}`}
               style={{ borderColor: UI.captionBorder, background: UI.captionBg, color: UI.tertiary }}
@@ -49,18 +46,15 @@ export default function LearnMode() {
               Learning Modes
             </div>
 
-            {/* Title */}
             <h2 className={`mt-6 ${type.h2}`}>
               Choose Your<br /> Learning Style
             </h2>
 
-            {/* Rows (accordion) */}
             <div className="mt-6">
               {items.map((m, idx) => {
                 const isActive = m.id === active;
                 return (
                   <div key={m.id} className="py-3">
-                    {/* Header */}
                     <button
                       type="button"
                       onClick={() => setActive(m.id)}
@@ -76,7 +70,6 @@ export default function LearnMode() {
                       </span>
                     </button>
 
-                    {/* Animated content (like Level component) */}
                     <div
                       id={`mode-${m.id}`}
                       className={[
@@ -102,7 +95,6 @@ export default function LearnMode() {
                       </div>
                     </div>
 
-                    {/* Divider (same style as other sections) */}
                     {idx < items.length - 1 && (
                       <div className="mt-6 h-px w-full" style={{ background: UI.captionBorder }} />
                     )}
@@ -112,7 +104,6 @@ export default function LearnMode() {
             </div>
           </div>
 
-          {/* RIGHT — Image swaps with active row */}
           <div
             className="relative flex justify-center items-center shrink-0 rounded-[24px] overflow-hidden"
           >
