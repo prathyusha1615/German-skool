@@ -1,11 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 type SaleBannerProps = {
-  /** Any Date-parsable string or Date object */
   deadline?: string | Date;
-  /** CTA href */
   ctaHref?: string;
-  /** Called once when countdown hits 0 */
   onExpire?: () => void;
 };
 
@@ -21,7 +18,6 @@ function getTimeParts(msRemaining: number) {
 }
 
 const SaleBanner: React.FC<SaleBannerProps> = ({
-  // ⬇️ Set your real deadline here (example: 3 days from now)
   deadline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
   ctaHref = "/",
   onExpire,
@@ -33,44 +29,38 @@ const SaleBanner: React.FC<SaleBannerProps> = ({
 
   const [now, setNow] = useState<number>(() => Date.now());
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
   const remaining = end.getTime() - now;
   const expired = remaining <= 0;
   const { days, hours, mins, secs } = getTimeParts(remaining);
 
   useEffect(() => {
-    if (expired && onExpire) onExpire();
-    // run only when it flips to expired
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (expired) return;
+
+    const id = setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => clearInterval(id);
   }, [expired]);
+
+  useEffect(() => {
+    if (expired && onExpire) onExpire();
+  }, [expired, onExpire]);
 
   return (
     <div
-      className="w-full text-center"
-      style={{
-        backgroundColor: "#826BFB",
-        color: "#F0EFF1",
-        fontFamily: "Raveo Display, sans-serif",
-        fontWeight: 600,
-        fontStyle: "normal",
-        fontSize: "16px",
-        lineHeight: "24px",
-        letterSpacing: "0%",
-        padding: "6px 0",
-      }}
+      className="w-full text-center bg-[#826BFB] text-[#F0EFF1] font-[600] text-[16px] leading-[24px] py-[6px]"
+      style={{ fontFamily: "Raveo Display, sans-serif" }}
       aria-live="polite"
       role="status"
     >
       {expired ? (
         <>
-          Sale ended.{" "}
+          Sale ended.
           <a
             href={ctaHref}
-            style={{ textDecoration: "underline", marginLeft: 4, color: "#F0EFF1" }}
+            className="underline ml-1"
+            style={{ color: "#F0EFF1" }}
           >
             See new offers →
           </a>
@@ -79,10 +69,11 @@ const SaleBanner: React.FC<SaleBannerProps> = ({
         <>
           Sale Ends Soon,&nbsp;
           {days > 0 && `${pad(days)}:`}
-          {pad(hours)}:{pad(mins)}:{pad(secs)}{" "}
+          {pad(hours)}:{pad(mins)}:{pad(secs)}
           <a
             href={ctaHref}
-            style={{ textDecoration: "underline", marginLeft: 4, color: "#F0EFF1" }}
+            className="underline ml-1"
+            style={{ color: "#F0EFF1" }}
           >
             GET IT NOW →
           </a>

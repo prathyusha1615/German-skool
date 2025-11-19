@@ -35,14 +35,11 @@ export default function FreeClass() {
   return (
     <section className="w-full">
       <div className="mx-auto max-w-[1600px] px-6 md:px-[120px] py-16 md:py-24">
-        {/* Card */}
         <div className="grid items-stretch gap-0 rounded-[28px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] md:grid-cols-2">
-          {/* Left: purple panel */}
           <div
             className="relative flex flex-col justify-center p-6 md:p-10"
             style={{ backgroundColor: UI.panelBg }}
           >
-            {/* Badge */}
             <div
               className={`inline-flex w-fit items-center gap-[6px] rounded-[36px] border px-3 py-1 ${type.caption}`}
               style={{
@@ -54,19 +51,16 @@ export default function FreeClass() {
               {content.badge}
             </div>
 
-            {/* Title */}
             <h2 className={`mt-4 ${type.h2}`} style={{ color: UI.title }}>
               {content.titleLine1}
               <br/>
               {content.titleLine2}
             </h2>
 
-            {/* Subtitle */}
             <p className={`mt-4 max-w-[34rem] ${type.subtitle}`} style={{ color: UI.subtitle }}>
               {content.subtitle}
             </p>
 
-            {/* CTA */}
             <div className="mt-6">
               <button
                 type="button"
@@ -82,7 +76,6 @@ export default function FreeClass() {
             </div>
           </div>
 
-          {/* Right: image */}
           <div className="relative h-[320px] md:h-auto">
             <img
               src={content.image}

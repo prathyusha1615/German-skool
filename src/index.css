@@ -62,3 +62,43 @@ input[type="date"].date-mask-hidden::-webkit-datetime-edit-day-field {
 input[type="date"].date-mask-hidden:focus::-webkit-datetime-edit {
   color: inherit;
 }
+
+
+.feature-icon {
+  width: 107px;
+  height: 107px;
+}
+
+@media (max-width: 640px) {
+  .feature-icon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+
+@keyframes cm-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.cm-marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    rgba(0, 0, 0, 0.85) 8%,
+    rgba(0, 0, 0, 0.85) 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    rgba(0, 0, 0, 0.85) 8%,
+    rgba(0, 0, 0, 0.85) 92%,
+    transparent 100%
+  );
+}

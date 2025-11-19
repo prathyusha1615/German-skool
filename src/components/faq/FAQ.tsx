@@ -32,10 +32,7 @@ const FAQ: React.FC = () => {
 
   return (
     <section className="w-full">
-      {/* Outer container — Scale/1300, side padding 120 */}
-      <div className="mx-auto max-w-5xl px-7 md:px-[120px] py-16 md:py-24">
-        {/* Header */}
-        <div className="text-center">
+      <div className="mx-auto max-w-5xl px-7 md:px-[120px] py-16 md:py-24">        <div className="text-center">
           <span
             className={`inline-flex items-center gap-[6px] rounded-[36px] border px-6 py-1 ${T.caption}`}
             style={{ borderColor: UI.captionBorder, background: UI.captionBg, color: UI.captionText }}
@@ -45,7 +42,6 @@ const FAQ: React.FC = () => {
           <h2 className={`mt-3 ${T.h2}`}>Frequently Asked Questions</h2>
         </div>
 
-        {/* Card container (Scale/1200 inside) */}
         <div className="mx-auto mt-8 md:mt-10 max-w-[1200px]">
           <div
             className="rounded-2xl overflow-hidden"
@@ -55,7 +51,6 @@ const FAQ: React.FC = () => {
               const open = row.id === openId;
               return (
                 <div key={row.id}>
-                  {/* Question row */}
                   <button
                     type="button"
                     onClick={() => setOpenId(open ? null : row.id)}
@@ -74,7 +69,6 @@ const FAQ: React.FC = () => {
                     </div>
                   </button>
 
-                  {/* Answer */}
                   {open && (
                     <div id={`faq-panel-${row.id}`} className="px-5 pb-6 md:px-8 md:pb-8 -mt-2">
                       <p className={T.a} style={{ color: UI.secondary }}>
@@ -83,7 +77,6 @@ const FAQ: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Divider (not after last) */}
                   {idx < items.length - 1 && (
                     <div
                       role="separator"
