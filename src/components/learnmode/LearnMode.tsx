@@ -37,7 +37,7 @@ export default function LearnMode() {
   return (
     <section id='benefits' className="w-full">
       {/* Scale/1600, side padding 120 */}
-      <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] py-16 md:py-24">
+      <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] sm:py-16 md:py-24">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_568px] md:gap-16">
           {/* LEFT — Accordion like Level component */}
           <div>
@@ -114,14 +114,13 @@ export default function LearnMode() {
 
           {/* RIGHT — Image swaps with active row */}
           <div
-            className="relative flex w-[568px] max-w-full h-[436px] justify-center items-center shrink-0 rounded-[24px] overflow-hidden"
-            style={{ aspectRatio: '142/109' }}
+            className="relative flex justify-center items-center shrink-0 rounded-[24px] overflow-hidden"
           >
             <img
               key={activeItem.image}
               src={activeItem.image}
               alt={activeItem.alt}
-              className="h-full w-full object-cover"
+              className="md:h-full md:w-full object-cover"
             />
           </div>
         </div>

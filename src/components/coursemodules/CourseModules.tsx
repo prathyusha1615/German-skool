@@ -82,12 +82,12 @@ export default function CourseModules() {
       <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] py-16 md:py-24">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[568px_minmax(0,1fr)] md:gap-16 items-start">
           {/* LEFT: Image (fixed 568×436) */}
-          <div style={{ isolation: "isolate" }} className="hidden md:block relative flex w-[568px] max-w-full h-[436px] justify-center items-center shrink-0 rounded-[24px] overflow-hidden bg-[#F0EFF1]">
+          <div style={{ isolation: "isolate" }} className="hidden md:block relative flex justify-center items-center shrink-0 rounded-[24px] overflow-hidden bg-[#F0EFF1]">
             <img
               key={activeItem.image}
               src={activeItem.image}
               alt={activeItem.heading}
-              className="h-full w-full object-cover"
+              className="md:h-full md:w-full object-cover"
             />
 
             {/* Infinite chips carousel */}

@@ -19,7 +19,7 @@ function FeatureCard({
   <div className="rounded-2xl" style={{ backgroundColor: accent }}>
     <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-7 md:p-16 gap-6">
       {/* Icon — above on mobile, right on md+ */}
-      <div className="order-1 md:order-2 pb-8 md:self-auto">
+      <div className="order-1 md:order-2 md:pb-8 pb-0 md:self-auto">
         <span
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: iconInline }}
@@ -86,8 +86,8 @@ const LearnGerman: React.FC = () => {
               </div>
 
               {/* H2 */}
-              <h2 className="text-[#242325] text-[28px] md:text-[40px] font-semibold leading-[50px] ">
-                Why 1000+ Students Chose <br />
+              <h2 className="text-[#242325] text-[28px] md:text-[40px] font-semibold leading-[35px] md:leading-[50px] ">
+                Why 1000+ Students Chose <br className="md:block hidden" />
                 Online German SKOOL
               </h2>
             </div>

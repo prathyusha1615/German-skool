@@ -9,7 +9,7 @@ const t = {
   caption:
     "text-[14px] leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif] text-[#6B6A70]",
   h2:
-    "md:text-[40px] text-[28px] leading-[35px] md:leading-[40px] font-[600] [font-family:'Raveo_Display',sans-serif] text-[#242325] text-center",
+    "md:text-[40px] sm:text-[28px] text-[26px] leading-[35px] md:leading-[40px] font-[600] [font-family:'Raveo_Display',sans-serif] text-[#242325] text-center",
   h4:
     "text-[28px] leading-[35px] font-[600] [font-family:'Raveo_Display',sans-serif] text-[#242325]",
   big:
@@ -46,7 +46,7 @@ function Card({
     >
       <div className={`${t.h4} ${lightText ? "text-white" : ""}`}>{tier}</div>
 
-      <div className="md:mt-32 mt-16 grid grid-cols-1 items-center justify-center gap-20 md:grid-cols-[auto_minmax(0,1fr)]">
+      <div className="md:mt-32 mt-10 grid grid-cols-1 items-center justify-center md:gap-20 gap-6 md:grid-cols-[auto_minmax(0,1fr)]">
         <div className=" leading-none">
           <div className={`${t.big} ${lightText ? "text-white/95" : "text-[#242325]"}`}>
             {label}
@@ -69,7 +69,7 @@ export default function CourseLevel() {
       {/* Scale/1600, side padding 120 */}
       <div className="mx-auto max-w-[1600px] px-7 md:px-[120px] py-16 md:py-24">
         {/* Section header */}
-        <div className="mx-auto max-w-[1200px] text-center pb-12">
+        <div className="mx-auto max-w-[1200px] text-center md:pb-12">
             <div
                 className="inline-block rounded-full px-3 py-1 mb-5"
                 style={{ color: "#6B6A70", fontFamily: "Raveo Display, sans-serif",

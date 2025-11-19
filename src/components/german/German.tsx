@@ -70,7 +70,7 @@ const German: React.FC = () => {
   const { COLORS, content, form, setField, errors, touched, setTouched, handleSubmit, loading } = useGerman();
 
   return (
-    <section className="w-full pt-20" style={{ background: "linear-gradient(180deg,#EEF2FF,#F7F9FF)" }}>
+    <section className="w-full md:pt-20" style={{ background: "linear-gradient(180deg,#EEF2FF,#F7F9FF)" }}>
       <div className="mx-auto max-w-[1700px] px-6 md:px-[120px]">
         <div className="mx-auto grid max-w-[1500px] items-start gap-10 py-12 md:grid-cols-[minmax(0,1fr)_620px] md:gap-0 md:py-16">
           {/* LEFT */}
@@ -120,7 +120,7 @@ const German: React.FC = () => {
               </a>
             </div>
 
-            <div className="mt-6 grid gap-3 grid-cols-2">
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
               <ul className="space-y-2" style={{ color: COLORS.body }}>
                 {content.bulletsLeft.map((b) => (
                   <Bullet key={b}>{b}</Bullet>
@@ -133,7 +133,7 @@ const German: React.FC = () => {
               </ul>
             </div>
 
-            <div className="mt-6 flex flex-col items-center gap-3 md:items-start">
+            <div className="mt-6 md:mb-0 mb-20 flex flex-col items-center gap-3 md:items-start">
               <div className="flex -space-x-3">
                 {avatars.map((src, i) => (
                   <img
@@ -153,7 +153,7 @@ const German: React.FC = () => {
 
           {/* RIGHT: Form */}
           <div className="relative">
-            <div className="absolute -top-20 left-60 animate-bounce md:block hidden ">
+            <div className="absolute md:-top-20 md:left-60 left-20 -top-16 animate-bounce ">
               <img src="https://media.onlinegermanskool.com/msg.svg" alt="" />
             </div>
             <GermanForm />

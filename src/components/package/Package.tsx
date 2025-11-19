@@ -10,9 +10,9 @@ const t = {
   h2:
     "md:text-[40px] text-[28px] leading-[35px] md:leading-[50px] font-[600] [font-family:'Raveo_Display',sans-serif] text-[#242325] text-center ",
   cardTitle:
-    "text-[40px] leading-[50px] font-[600] [font-family:'Raveo_Display',sans-serif]",
+    "md:text-[40px] text-[22px] leading-[27.5px] md:leading-[50px] font-[600] [font-family:'Raveo_Display',sans-serif]",
   perk:
-    "text-[14px] leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif]",
+    "md:text-[14px] text-[12px] leading-[18px] md:leading-[21px] font-[400] [font-family:'Raveo_Display',sans-serif]",
 };
 
 /** inline check icon */
@@ -93,9 +93,9 @@ export default function Package() {
 
             <div className="mt-5 h-px w-full bg-white/50" />
 
-            <ul className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <ul className="mt-5 grid md:gap-4 gap-2 grid-cols-2">
               {plans[0].perks.map((p) => (
-                <li key={p} className="flex items-start gap-3">
+                <li key={p} className="flex items-start md:gap-3 gap-0">
                   <Check color="#B1F2CF" />
                   <span className={`${t.perk} text-white/90`}>{p}</span>
                 </li>
@@ -122,7 +122,7 @@ export default function Package() {
             </div>
             {plans[1].recommended && (
               <div
-                className="absolute right-6 top-6 rounded-full px-3 py-1 text-[12px] font-[600]"
+                className="absolute md:right-6 md:top-6 right-3 top-3 rounded-full px-3 py-1 text-[12px] font-[600]"
                 style={{
                   background: "#F0EFF1",
                   color: UI.neutralSecondary,
@@ -143,9 +143,9 @@ export default function Package() {
 
             <div className="mt-5 h-px w-full bg-[#E9E8ED]" />
 
-            <ul className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <ul className="mt-5 grid md:gap-4 gap-2 grid-cols-2">
               {plans[1].perks.map((p) => (
-                <li key={p} className="flex items-start gap-3">
+                <li key={p} className="flex items-start md:gap-3 gap-0">
                   <Check color="#26C281" />
                   <span className={`${t.perk} text-[#47464A]`}>{p}</span>
                 </li>
