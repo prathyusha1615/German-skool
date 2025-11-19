@@ -1,7 +1,7 @@
 export default function useFreeClass() {
   // Colors centralised so you can theme quickly
   const UI = {
-    panelBg: '#984DDD',            // left purple panel
+    panelBg: '#826BFB',            
     title: '#F0EFF1',
     subtitle: '#E0DFE3',
     // badge

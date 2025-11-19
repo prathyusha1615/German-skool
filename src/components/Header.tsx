@@ -83,8 +83,6 @@ export default function Header({
           </div>
         </div>
       </header>
-
-      {/* Mobile overlay */}
       {open && (
         <div
           id="mobile-overlay"
@@ -106,7 +104,6 @@ export default function Header({
               bg-[#ffffff] shadow-xl sm:rounded-none
             "
           >
-            {/* top bar within overlay */}
             <div className="flex items-center justify-between px-4 py-4">
               <img src="https://media.onlinegermanskool.com/logo.svg" alt="Logo" className="h-7 w-auto" />
               <button
@@ -117,8 +114,6 @@ export default function Header({
                 <CloseIcon />
               </button>
             </div>
-
-            {/* list with dividers (like your mock) */}
             <div className="mx-4 overflow-hidden rounded-xl bg-white px-8">
               {[
                 { label: "Courses", href: "#courses" },

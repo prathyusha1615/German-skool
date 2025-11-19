@@ -104,20 +104,23 @@ const German: React.FC = () => {
 
             <div className="mt-5 flex w-full flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
               <a
+  href="#courses"
+  className="inline-flex h-12 w-full items-center justify-center rounded-xl border text-sm font-semibold sm:w-auto sm:px-6"
+  style={{ borderColor: "#D9DEE7", color: "#414f66ff"}}
+>
+  {content.ctas.explore}
+</a>
+
+
+              <a
                 href="/contact_us"
                 className="inline-flex h-12 w-full items-center justify-center rounded-xl text-sm font-semibold sm:w-auto sm:px-6"
-                style={{ backgroundColor: COLORS.ctaBg, color: COLORS.ctaText, fontFamily: "Raveo Display, sans-serif", fontWeight: 600 }}
+                style={{ backgroundColor: COLORS.ctaBg, color: COLORS.ctaText, fontFamily: "Raveo Display, sans-serif", fontWeight: 600}}
               >
                 {content.ctas.book} <span className="ml-2">→</span>
               </a>
 
-              <a
-                href="#courses"
-                className="inline-flex h-12 w-full items-center justify-center rounded-xl border text-sm font-semibold sm:w-auto sm:px-6"
-                style={{ borderColor: "#D9DEE7", color: COLORS.primary, backgroundColor: "white" }}
-              >
-                {content.ctas.explore}
-              </a>
+              
             </div>
 
             <div className="mt-6 grid gap-3 grid-cols-2">
@@ -150,8 +153,6 @@ const German: React.FC = () => {
               </p>
             </div>
           </div>
-
-          {/* RIGHT: Form */}
           <div className="relative">
             <div className="absolute -top-20 left-60 animate-bounce md:block hidden ">
               <img src="https://media.onlinegermanskool.com/msg.svg" alt="" />

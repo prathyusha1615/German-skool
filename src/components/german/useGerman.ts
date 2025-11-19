@@ -23,8 +23,9 @@ export const content = {
   description:
     "Live online classes with certified German tutors. Flexible schedules, personalized learning, and a free trial class to help you start with confidence.",
   ctas: {
-    explore: "Explore Courses",
+   
     book: "Book Free Trial Class",
+     explore: "Explore Courses",
     submit: "Get Started for Free →",
   },
   bulletsLeft: [

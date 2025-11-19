@@ -3,9 +3,9 @@
 export type LearnModeItem = {
   id: 'solo' | 'squad';
   title: string;
-  lead: string;         // the small sentence above the bullets
+  lead: string;         
   bullets: string[];
-  image: string;        // /public path
+  image: string;        
   alt: string;
 };
 

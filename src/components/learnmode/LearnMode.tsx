@@ -70,7 +70,7 @@ export default function LearnMode() {
                     >
                       <span
                         className={`${type.rowTitle} transition-colors`}
-                        style={{ color: isActive ? UI.brand : UI.secondary }}
+                        style={{ color: isActive ? UI.primary : UI.brand }}
                       >
                         {m.title}
                       </span>

@@ -18,8 +18,18 @@ const t = {
 /** inline check icon */
 const Check = ({ color = "#26C281" }: { color?: string }) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+    {/* Circle */}
+    <circle
+      cx="10"
+      cy="10"
+      r="9"
+      stroke={color}
+      strokeWidth="1.5"
+    />
+
+    {/* Single check mark */}
     <path
-      d="M4 11L6.5 13.5M10 9.5L12.5 7M8 11L10.5 13.5L16.5 7"
+      d="M6.5 10L9 12.5L14 7.5"
       stroke={color}
       strokeWidth="1.5"
       strokeLinecap="round"
@@ -27,6 +37,7 @@ const Check = ({ color = "#26C281" }: { color?: string }) => (
     />
   </svg>
 );
+
 
 /** faint mesh overlay svg */
 const Mesh = () => (
