@@ -15,7 +15,7 @@ const t = {
 };
 
 const Check = ({ color = "#26C281" }: { color?: string }) => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+  <svg className=" w-4 h-4" viewBox="0 0 20 20" fill="none" aria-hidden>
     {/* Circle */}
     <circle
       cx="10"
@@ -100,7 +100,7 @@ export default function Package() {
 
             <ul className="mt-5 grid md:gap-4 gap-2 grid-cols-2">
               {plans[0].perks.map((p) => (
-                <li key={p} className="flex items-start md:gap-3 gap-0">
+                <li key={p} className="flex items-start md:gap-3 gap-1">
                   <Check color="#B1F2CF" />
                   <span className={`${t.perk} text-white/90`}>{p}</span>
                 </li>
@@ -148,7 +148,7 @@ export default function Package() {
 
             <ul className="mt-5 grid md:gap-4 gap-2 grid-cols-2">
               {plans[1].perks.map((p) => (
-                <li key={p} className="flex items-start md:gap-3 gap-0">
+                <li key={p} className="flex items-start md:gap-3 gap-1">
                   <Check color="#26C281" />
                   <span className={`${t.perk} text-[#47464A]`}>{p}</span>
                 </li>
