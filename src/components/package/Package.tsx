@@ -119,7 +119,7 @@ export default function Package() {
             </button>
           </article>
 
-          <article className="relative rounded-[24px] border border-[#E7E6EA] bg-white p-6 md:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+          <article className="relative rounded-[24px] bg-white p-6 md:p-8 ">
             <div className="absolute right-0 top-0">
               <Mesh />
             </div>
