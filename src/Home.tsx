@@ -1,18 +1,18 @@
-import React from "react";
-import SaleBanner from "./components/SaleBanner"; // adjust the path if different
+import React, { lazy, Suspense } from "react";
+import SaleBanner from "./components/SaleBanner";
 import Header from "./components/Header";
 import German from "./components/german/German";
-import LearnGerman from "./components/learngerman/LearnGerman";
-import CourseLevel from "./components/courselevel/CourseLevel";
-import CourseModules from "./components/coursemodules/CourseModules";
-import LearnMode from "./components/learnmode/LearnMode";
-import Segmentation from "./components/segmentation/Segmentation";
-import Package from "./components/package/Package";
-import Footer from "./components/Footer";
-import FAQ from "./components/faq/FAQ";
-import FreeClass from "./components/freeclass/FreeClass";
-import Journey from "./components/journey/Journey";
 
+const LearnGerman = lazy(() => import("./components/learngerman/LearnGerman"));
+const CourseLevel = lazy(() => import("./components/courselevel/CourseLevel"));
+const CourseModules = lazy(() => import("./components/coursemodules/CourseModules"));
+const LearnMode = lazy(() => import("./components/learnmode/LearnMode"));
+const Segmentation = lazy(() => import("./components/segmentation/Segmentation"));
+const Package = lazy(() => import("./components/package/Package"));
+const Journey = lazy(() => import("./components/journey/Journey"));
+const FreeClass = lazy(() => import("./components/freeclass/FreeClass"));
+const FAQ = lazy(() => import("./components/faq/FAQ"));
+const Footer = lazy(() => import("./components/Footer"));
 const Home: React.FC = () => {
   return (
     <div>

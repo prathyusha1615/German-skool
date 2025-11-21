@@ -1,18 +1,20 @@
-import './App.css';
+// App.tsx – AFTER
+import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from './Home';
-import Contact from './Contact';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
-import PopUp from './components/PopUp';
-import ThankYouPage from './ThankYouPage';
-import PrivacyPolicy from './PrivacyPolicy';
-import TermsAndConditions from './TermsAndConditions';
+
+const Home = lazy(() => import("./Home"));
+const Contact = lazy(() => import("./Contact"));
+const ThankYouPage = lazy(() => import("./ThankYouPage"));
+const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("./TermsAndConditions"));
+const FloatingWhatsApp = lazy(() => import("./components/FloatingWhatsApp"));
+const PopUp = lazy(() => import("./components/PopUp"));
+
 function App() {
   return (
-    <>
-    <PopUp />
-
-    <Routes>
+    <Suspense fallback={<div />}>
+      <PopUp />
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact_us" element={<Contact />} />
         <Route path="/thank_you" element={<ThankYouPage />} />
@@ -20,8 +22,8 @@ function App() {
         <Route path="/terms_and_conditions" element={<TermsAndConditions />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    <FloatingWhatsApp />
-    </>
+      <FloatingWhatsApp />
+    </Suspense>
   );
 }
 

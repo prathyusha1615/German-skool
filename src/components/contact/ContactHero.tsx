@@ -1,15 +1,13 @@
 import React from "react";
 import useContactHero from "./useContactHero";
-import { DatePicker } from "antd";            
-import dayjs, { type Dayjs } from "dayjs";
 import GermanForm from "../german/GermanForm";
-const avatars: string[] = [
-  "https://media.onlinegermanskool.com/assets/socialicons/Facebook.svg",
-  "https://media.onlinegermanskool.com/assets/socialicons/Instagram.svg",
-  "https://media.onlinegermanskool.com/assets/socialicons/LinkedIn.svg",
-  "https://media.onlinegermanskool.com/assets/socialicons/YouTube.svg",
-  "https://media.onlinegermanskool.com/assets/socialicons/Twitter.svg",
-];
+// const avatars: string[] = [
+//   "https://media.onlinegermanskool.com/assets/socialicons/Facebook.svg",
+//   "https://media.onlinegermanskool.com/assets/socialicons/Instagram.svg",
+//   "https://media.onlinegermanskool.com/assets/socialicons/LinkedIn.svg",
+//   "https://media.onlinegermanskool.com/assets/socialicons/YouTube.svg",
+//   "https://media.onlinegermanskool.com/assets/socialicons/Twitter.svg",
+// ];
 
 const RingCheck: React.FC<{ color?: string }> = ({ color = "#3AA376" }) => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
